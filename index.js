@@ -92,7 +92,7 @@ app.get('/ultimas/:jornalId', async (req, res) => {
             const $ = cheerio.load(html)
             const specificArticles = []
 
-            $('a:contains("A")'.addClass , html).each(function () {
+            $('a:contains("A")', html).each(function () {
                 const title = $(this).text()
                 const url = $(this).attr('href')
                 specificArticles.push ({
