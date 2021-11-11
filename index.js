@@ -19,6 +19,16 @@ const jornals = [
         base: 'https://www.livescore.com'
     },
     {
+        name: 'jogo',
+        address: 'https://www.ojogo.pt/futebol.html',
+        base: 'https://www.ojogo.pt'
+    },
+    {
+        name: 'record',
+        address: 'https://www.record.pt/ultimas-noticias',
+        base: 'https://www.record.pt'
+    },
+    {
         name: 'besoccer',
         address: 'https://pt.besoccer.com/noticias',
         base: ''
@@ -37,7 +47,7 @@ jornals.forEach(jornal => {
                 const title = $(this).text()
                 const url = $(this).attr('href')
 
-                classification.push ({
+                classification.push({
                     title,
                     url: jornal.base + url,
                 })
@@ -54,11 +64,11 @@ jornals.forEach(jornal => {
             const html = response.data
             const $ = cheerio.load(html)
 
-            $('a:contains("Liga")', html).each(function () {
+            $('a', html).each(function () {
                 const title = $(this).text()
                 const url = $(this).attr('href')
-
-                articles.push ({
+ 
+                articles.push({
                     title,
                     url: jornal.base + url,
                     source: jornal.name
@@ -68,15 +78,15 @@ jornals.forEach(jornal => {
         })
 })
 
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.json('Welcome to my Football API')
 })
 
-app.get('/classificacao', (req,res) => {
+app.get('/classificacao', (req, res) => {
     res.json(classification)
 })
 
-app.get('/ultimas', (req,res) => {
+app.get('/ultimas', (req, res) => {
     res.json(articles)
 })
 
@@ -92,10 +102,20 @@ app.get('/ultimas/:jornalId', async (req, res) => {
             const $ = cheerio.load(html)
             const specificArticles = []
 
-            $('a:contains("A")', html).each(function () {
+            $('h1', html).each(function () {
                 const title = $(this).text()
                 const url = $(this).attr('href')
-                specificArticles.push ({
+                specificArticles.push({
+                    title,
+                    url: jornalBase + url,
+                    source: jornalId
+                })
+            })
+
+            $('h2', html).each(function () {
+                const title = $(this).text()
+                const url = $(this).attr('href')
+                specificArticles.push({
                     title,
                     url: jornalBase + url,
                     source: jornalId
