@@ -9,17 +9,17 @@ const app = express()
 
 const websites = [
     {
-        name: 'blackmarket',
+        name: 'BlackMarket',
         address: 'https://www.backmarket.pt/apple-recondicionados.html',
         base: 'https://www.backmarket.pt'
     },
     {
-        name: 'ioutlet',
+        name: 'iOutlet',
         address: 'https://www.ioutletstore.pt/',
         base: ''
     },
     {
-        name: 'swappie',
+        name: 'Swappie',
         address: 'https://swappie.com/pt-en/iphone/',
         base: 'https://swappie.com'
     }
@@ -33,7 +33,7 @@ websites.forEach(website => {
             const html = response.data
             const $ = cheerio.load(html)
 
-            if (website.name == 'blackmarket'){
+            if (website.name == 'BlackMarket'){
                 $('section', html).each(function () {
                     $('a[data-bmid]', html).each(function () {
                         const title = $('h2', this).text().trim()
@@ -51,7 +51,7 @@ websites.forEach(website => {
                         })
                     })
                 })
-            } else if (website.name == 'ioutlet') {
+            } else if (website.name == 'iOutlet') {
                     $('div.woocommerce-card__header', html).each(function () {
                         const title = $('a:Contains("Apple")', this).attr('aria-label')
                         if (!title) {
@@ -86,7 +86,12 @@ websites.forEach(website => {
 })
 
 app.get('/', (req, res) => {
-    res.json('Welcome to my API of reconditioned iPhones')
+    const message = ('Welcome to my API of reconditioned Apple Devices                                                                                                                      \
+        The paths that are possible are:                                                                                                                                          \
+        /products                                                                                                                                                  \
+        /products/:websiteId                                                                                                                                                      \
+        The websites that are used are: BlackMarket, iOutlet and Swappie')
+    res.json(message)
 })
 
 app.get('/products', (req, res) => {
@@ -98,14 +103,13 @@ app.get('/products/:websiteId', async (req, res) => {
 
     const websiteAdress = websites.filter(website => website.name == websiteId)[0].address
     const websiteBase = websites.filter(website => website.name == websiteId)[0].base
-
     axios.get(websiteAdress)
         .then(response => {
             const html = response.data
             const $ = cheerio.load(html)
             const specificproducts = []
 
-            if (websiteId == 'blackmarket'){
+            if (websiteId == 'BlackMarket'){
                 $('section', html).each(function () {
                     $('a[data-bmid]', html).each(function () {
                         const title = $('h2', this).text().trim()
@@ -123,7 +127,7 @@ app.get('/products/:websiteId', async (req, res) => {
                         })
                     })
                 })
-            } else if (websiteId == 'ioutlet') {
+            } else if (websiteId == 'iOutlet') {
                     $('div.woocommerce-card__header', html).each(function () {
                         const title = $('a:Contains("Apple")', this).attr('aria-label')
                         if (!title) {
