@@ -86,10 +86,10 @@ websites.forEach(website => {
 })
 
 app.get('/', (req, res) => {
-    const message = ('Welcome to my API of reconditioned Apple Devices                                                                                                                      \
-        The paths that are possible are:                                                                                                                                          \
-        /products                                                                                                                                                  \
-        /products/:websiteId                                                                                                                                                      \
+    const message = ('Welcome to my API of reconditioned Apple Devices\
+        The paths that are possible are:\
+        /products\
+        /products/:websiteId\
         The websites that are used are: BlackMarket, iOutlet and Swappie')
     res.json(message)
 })
