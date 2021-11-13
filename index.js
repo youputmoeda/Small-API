@@ -7,121 +7,154 @@ const PORT = process.env.PORT || 8080
 
 const app = express()
 
-const jornals = [
+const websites = [
     {
-        name: 'maisfutebol',
-        address: 'https://maisfutebol.iol.pt/liga',
-        base: 'https://maisfutebol.iol.pt'
+        name: 'blackmarket',
+        address: 'https://www.backmarket.pt/apple-recondicionados.html',
+        base: 'https://www.backmarket.pt'
     },
     {
-        name: 'livescore',
-        address: 'https://www.livescore.com/en/news',
-        base: 'https://www.livescore.com'
-    },
-    {
-        name: 'jogo',
-        address: 'https://www.ojogo.pt/futebol.html',
-        base: 'https://www.ojogo.pt'
-    },
-    {
-        name: 'record',
-        address: 'https://www.record.pt/ultimas-noticias',
-        base: 'https://www.record.pt'
-    },
-    {
-        name: 'besoccer',
-        address: 'https://pt.besoccer.com/noticias',
+        name: 'ioutlet',
+        address: 'https://www.ioutletstore.pt/',
         base: ''
+    },
+    {
+        name: 'swappie',
+        address: 'https://swappie.com/pt-en/iphone/',
+        base: 'https://swappie.com'
     }
 ]
 
-const classification = []
+const products = []
 
-jornals.forEach(jornal => {
-    axios.get(jornal.address)
+websites.forEach(website => {
+    axios.get(website.address)
         .then(response => {
             const html = response.data
             const $ = cheerio.load(html)
 
-            $('a:contains("º")', html).each(function () {
-                const title = $(this).text()
-                const url = $(this).attr('href')
-
-                classification.push({
-                    title,
-                    url: jornal.base + url,
+            if (website.name == 'blackmarket'){
+                $('section', html).each(function () {
+                    $('a[data-bmid]', html).each(function () {
+                        const title = $('h2', this).text().trim()
+                        const url = $(this).attr('href')
+                        const specifications = $('span:Contains("GB")', this).text().trim()
+                        const Warranty = $('span:Contains("Garantia")', this).text().trim()
+                        const price = $('span:Contains("€")', this).first().text().trim()
+                        products.push({
+                            title,
+                            specifications,
+                            Warranty,
+                            price,
+                            url: website.base + url,
+                            source: website.name
+                        })
+                    })
                 })
+            } else if (website.name == 'ioutlet') {
+                    $('div.woocommerce-card__header', html).each(function () {
+                        const title = $('a:Contains("Apple")', this).attr('aria-label')
+                        if (!title) {
+                            return 
+                        }
+                        const price = $('ins', this).text()
+                        const url = $('a:Contains("Apple")', this).attr('href')
+                        products.push({
+                            title,
+                            price,
+                            url: website.base + url,
+                            source: website.name
+                        })
+                    })
+                } else {
+                    $('li', html).each(function () {
+                        const title = $('a:Contains("iPhone")', this).text().trim()
+                        if (!title) {
+                            return 
+                        }
+                        const price = $('span:Contains("€")',this).last().text().trim()
+                        const url = $('a:Contains("iPhone")', this).attr('href')
+                        products.push({
+                            title,
+                            price,
+                            url: website.base + url,
+                            source: website.name
+                        })
+                    })
+                }
             })
-
-        })
-})
-
-const articles = []
-
-jornals.forEach(jornal => {
-    axios.get(jornal.address)
-        .then(response => {
-            const html = response.data
-            const $ = cheerio.load(html)
-
-            $('a', html).each(function () {
-                const title = $(this).text()
-                const url = $(this).attr('href')
- 
-                articles.push({
-                    title,
-                    url: jornal.base + url,
-                    source: jornal.name
-                })
-            })
-
-        })
 })
 
 app.get('/', (req, res) => {
-    res.json('Welcome to my Football API')
+    res.json('Welcome to my API of reconditioned iPhones')
 })
 
-app.get('/classificacao', (req, res) => {
-    res.json(classification)
+app.get('/products', (req, res) => {
+    res.json(products)
 })
 
-app.get('/ultimas', (req, res) => {
-    res.json(articles)
-})
+app.get('/products/:websiteId', async (req, res) => {
+    const websiteId = req.params.websiteId
 
-app.get('/ultimas/:jornalId', async (req, res) => {
-    const jornalId = req.params.jornalId
+    const websiteAdress = websites.filter(website => website.name == websiteId)[0].address
+    const websiteBase = websites.filter(website => website.name == websiteId)[0].base
 
-    const jornalAdress = jornals.filter(jornal => jornal.name == jornalId)[0].address
-    const jornalBase = jornals.filter(jornal => jornal.name == jornalId)[0].base
-
-    axios.get(jornalAdress)
+    axios.get(websiteAdress)
         .then(response => {
             const html = response.data
             const $ = cheerio.load(html)
-            const specificArticles = []
+            const specificproducts = []
 
-            $('h1', html).each(function () {
-                const title = $(this).text()
-                const url = $(this).attr('href')
-                specificArticles.push({
-                    title,
-                    url: jornalBase + url,
-                    source: jornalId
+            if (websiteId == 'blackmarket'){
+                $('section', html).each(function () {
+                    $('a[data-bmid]', html).each(function () {
+                        const title = $('h2', this).text().trim()
+                        const url = $(this).attr('href')
+                        const specifications = $('span:Contains("GB")', this).text().trim()
+                        const Warranty = $('span:Contains("Garantia")', this).text().trim()
+                        const price = $('span:Contains("€")', this).first().text().trim()
+                        specificproducts.push({
+                            title,
+                            specifications,
+                            Warranty,
+                            price,
+                            url: websiteBase + url,
+                            source: websiteId
+                        })
+                    })
                 })
-            })
-
-            $('h2', html).each(function () {
-                const title = $(this).text()
-                const url = $(this).attr('href')
-                specificArticles.push({
-                    title,
-                    url: jornalBase + url,
-                    source: jornalId
-                })
-            })
-            res.json(specificArticles)
+            } else if (websiteId == 'ioutlet') {
+                    $('div.woocommerce-card__header', html).each(function () {
+                        const title = $('a:Contains("Apple")', this).attr('aria-label')
+                        if (!title) {
+                            return 
+                        }
+                        const price = $('ins', this).text()
+                        const url = $('a:Contains("Apple")', this).attr('href')
+                        specificproducts.push({
+                            title,
+                            price,
+                            url: websiteBase + url,
+                            source: websiteId
+                        })
+                    })
+                } else {
+                    $('li', html).each(function () {
+                        const title = $('a:Contains("iPhone")', this).text().trim()
+                        if (!title) {
+                            return 
+                        }
+                        const price = $('span:Contains("€")',this).last().text().trim()
+                        const url = $('a:Contains("iPhone")', this).attr('href')
+                        specificproducts.push({
+                            title,
+                            price,
+                            url: websiteBase + url,
+                            source: websiteId
+                        })
+                    })
+                }
+            res.json(specificproducts)
         }).catch(err => console.log(err))
 })
 
