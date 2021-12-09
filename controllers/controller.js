@@ -1,11 +1,9 @@
-const express = require('express')
+// const express = require('express')
+// const app = express()
 const axios = require('axios')
 const cheerio = require('cheerio')
-const { response } = require('express')
-const { last } = require('cheerio/lib/api/traversing')
-const PORT = process.env.PORT || 8080
-
-const app = express()
+// const { response } = require('express')
+// const { last } = require('cheerio/lib/api/traversing')
 
 const websites = [
     {
@@ -85,22 +83,22 @@ websites.forEach(website => {
             })
 })
 
-app.get('/', (req, res) => {
+exports.FirstPage = (req, res) => {
     const message = ('Welcome to my API of reconditioned Apple Devices\
         The paths that are possible are:\
         /products\
         /products/:websiteId\
         The websites that are used are: BlackMarket, iOutlet and Swappie')
     res.json(message)
-})
+}
 
-app.get('/products', (req, res) => {
+exports.findAll = (req, res) => {
     res.json(products)
-})
+}
 
-app.get('/products/:websiteId', async (req, res) => {
+exports.findOne = async (req, res) => {
     const websiteId = req.params.websiteId
-
+    console.log("websiteId: " + websiteId)
     const websiteAdress = websites.filter(website => website.name == websiteId)[0].address
     const websiteBase = websites.filter(website => website.name == websiteId)[0].base
     axios.get(websiteAdress)
@@ -160,6 +158,4 @@ app.get('/products/:websiteId', async (req, res) => {
                 }
             res.json(specificproducts)
         }).catch(err => console.log(err))
-})
-
-app.listen(PORT, () => console.log(`Server running in PORT ${PORT}`))
+}
