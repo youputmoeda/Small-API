@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Store</title>
+    <title>First Page</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=800, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="css/estilo.css" />
@@ -45,19 +45,186 @@
               </p>
             </div>
           </div>
-              <button type="button" class="btn btn-outline-info btn-lg">
-                <a href="onload.html"
-                  >Clique aqui para obter todos os produtos</a
-                >
-              </button>
-              <br>
-              <button type="button" class="btn btn-outline-info btn-lg">
-                <a href="ondemand.html"
-                  >Clique aqui para obter os produtos de um website especifico</a
-                >
-              </button>
+          <!-- Click on Modal Button -->
+          <!-- <button type="button" class="btn btn-primary mx-auto d-block mt-5" data-bs-toggle="modal" data-bs-target="#modalLogin"> -->
+          <button
+            type="button"
+            class="btn btn-primary mx-auto d-block mt-5"
+            id="btnModalLogin"
+          >
+            Fazer login
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-primary mx-auto d-block mt-5"
+            id="btnModalRegistar"
+          >
+            Registar
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-warning mx-auto d-block mt-5"
+            id="btnLogoff"
+          >
+            Fazer logoff
+          </button>
+
+          <!-- Modal para registar novo utilizador -->
+          <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+          <div
+            class="modal fade"
+            id="modalRegistar"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+            data-bs-backdrop="static"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Registo de novo utilizador
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label class="form-label">E-Mail</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="usernameRegistar"
+                      name="usernameRegistar"
+                      placeholder="E-Mail"
+                    />
+                    <p id="emailErroLoginRegistar"></p>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Senha</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="senhaRegistar"
+                      name="senhaRegistar"
+                      placeholder="Senha"
+                    />
+                    <p id="statusRegistar"></p>
+                  </div>
+                  <div class="modal-footer d-block">
+                    <button id="btnCancelaRegistar" class="btn btn-warning float-end" data-bs-dismiss="modal">
+                      Cancelar
+                    </button>
+                    <button
+                      class="btn btn-success float-end"
+                      id="btnSubmitRegistar"
+                      onclick="validaRegisto()"
+                    >
+                      Submeter
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal para fazer login -->
+          <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+          <div
+            class="modal fade"
+            id="modalLogin"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+            data-bs-backdrop="static"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Insira suas credenciais
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    id="btnLoginClose"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label class="form-label">E-Mail</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="usernameLogin"
+                      name="usernameLogin"
+                      placeholder="E-Mail"
+                    />
+                    <p id="emailErroLogin"></p>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Senha</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="senhaLogin"
+                      name="senhaLogin"
+                      placeholder="Senha"
+                    />
+                    <p id="passErroLogin"></p>
+                    <p id="statusLogin"></p>
+                  </div>
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" />
+                    <label class="form-check-label" for="rememberMe"
+                      >Lembrar-me</label
+                    >
+                  </div>
+                  <div class="modal-footer d-block">
+                    <p id='pRegistar' class="float-start">
+                      Sem conta ainda? <a href="#">Registe-se</a>
+                    </p>
+                    <button class="btn btn-warning float-end" data-bs-dismiss="modal">
+                      Cancelar
+                    </button>
+                    <button
+                      class="btn btn-success float-end"
+                      id="btnSubmitLogin"
+                      onclick="validaLogin()"
+                    >
+                      Submeter
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-info btn-lg">
+            <a href="onload.html"
+              >Clique aqui para obter todos os produtos</a
+            >
+          </button>
+          <br>
+          <button type="button" class="btn btn-outline-info btn-lg">
+            <a href="ondemand.html"
+              >Clique aqui para obter os produtos de um website especifico</a
+            >
+          </button>
         </ul>
       </nav>
+      <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then  Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </header>
     <footer>
       <p>&copy;2021 Magalhães</p>

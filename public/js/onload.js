@@ -16,14 +16,15 @@ window.onload = () => {
         products = await response.json();
         for (const product of products) {
           texto += `
-                <div>
-            <h4>${product.title}</h4>
+          <div>
+            <h4><em>
+              <a href="${product.url}" target="_blank">${product.title}</a>
+            </em></h4>
             &nbsp;&nbsp;&nbsp;Specifications: <a>${product.specifications}</a>
             <br>&nbsp;&nbsp;&nbsp;Price: <a>${product.price}</a>
             <br>&nbsp;&nbsp;&nbsp;<a>${product.Warranty}</a>
-            <br>&nbsp;&nbsp;&nbsp;Link: <a href="${product.url}" target="_blank">${product.url}</a>
             <br>&nbsp;&nbsp;&nbsp;Website: <a>${product.source}</a>
-        </div>`;
+          </div>`;
         }
         listaProducts.innerHTML = texto;
       }

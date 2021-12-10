@@ -6,6 +6,15 @@ module.exports = app => {
     //inicio
     router.get("/", controlador.FirstPage);
 
+    // Cria um novo utilizador
+    router.post("/registar", controlador.registar);
+
+    // Rota para login - tem de ser POST para não vir user e pass na URL
+    router.post("/login", controlador.login);
+
+    // Rota para verificar e ativar o utilizador
+    router.get("/auth/confirm/:confirmationCode", controlador.verificaUtilizador)
+
     //produtos
     router.get("/products/", controlador.findAll);
 
