@@ -226,7 +226,11 @@ exports.FirstPage = (req, res) => {
 }
 
 exports.findAll = (req, res) => {
+    authenticateToken(req, res);
+    if (req.email != null) {
+    // utilizador autenticado
     res.json(products)
+    }
 }
 
 exports.findOne = async (req, res) => {
@@ -293,6 +297,10 @@ exports.findOne = async (req, res) => {
                         })
                     })
                 }
+            authenticateToken(req, res);
+            if (req.email != null) {
+            // utilizador autenticado
             res.json(specificproducts)
+            }
         }).catch(err => console.log(err))
 }
