@@ -67,7 +67,7 @@ function validaRegisto() {
       statReg.innerHTML = result.message;
       document.getElementById("btnSubmitRegistar").style.display = "none";
       document.getElementById("btnCancelaRegistar").innerHTML =
-        "Fechar este diálogo";
+        "Fechar este diálogo aaaa";
     })
     .catch((error) => {
       document.getElementById(
@@ -117,7 +117,6 @@ async function getProducts(websiteId, websiteSource, websiteUrl, websiteWarra, w
     const criteria = document.getElementById("searchkey").value;
     console.log("Critério: " + criteria);
     let texto = "";
-    let myHeaders = new Headers();
     let url = urlBase + "/products";
 
     const token = localStorage.token;
