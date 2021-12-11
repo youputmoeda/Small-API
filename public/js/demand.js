@@ -11,7 +11,7 @@ const btnModalLogin = document.getElementById("btnModalLogin");
 const btnModalRegistar = document.getElementById("btnModalRegistar");
 const btnLogoff = document.getElementById("btnLogoff");
 const pRegistar = document.getElementById("pRegistar");
-const listaDisciplinas = document.getElementById("listaDisciplinas");
+const listaProducts = document.getElementById("listaProducts");
 
 pRegistar.addEventListener("click", () => {
   bsModalLogin.hide();
@@ -103,7 +103,7 @@ function validaLogin() {
       const token = result.accessToken;
       localStorage.setItem("token", token);
       document.getElementById("statusLogin").innerHTML = "Sucesso!";
-      listaDisciplinas.innerHTML = "";
+      listaProducts.innerHTML = "";
       document.getElementById("btnLoginClose").click();
     })
     .catch(async (error) => {
@@ -112,14 +112,13 @@ function validaLogin() {
 }
 
 
-async function getProducts(websiteId, websiteSource, websiteUrl, websiteWarra, websitePrice, websiteSpec, websiteImg) {
-    const urlBase = "http://localhost:8008/api/products";
+async function getProducts(websiteId, websiteSource, websiteUrl, websiteWarra, websitePrice, websiteSpec) {
     const listaProducts = document.getElementById("specificproducts");
     const criteria = document.getElementById("searchkey").value;
     console.log("Critério: " + criteria);
     let texto = "";
     let myHeaders = new Headers();
-    let url = urlBase;
+    let url = urlBase + "/products";
 
     const token = localStorage.token;
     console.log(token);
