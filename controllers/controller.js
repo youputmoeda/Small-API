@@ -2,6 +2,8 @@ require("dotenv").config();
 
 const db = require("../models/nedb"); // Define o MODEL que vamos usar
 const bcrypt = require("bcrypt");
+const axios = require('axios')
+const cheerio = require('cheerio')  
 const jwt = require("jsonwebtoken");
 
 function authenticateToken(req, res) {
@@ -133,8 +135,6 @@ exports.login = async (req, res) => {
 
 // const express = require('express')
 // const app = express()
-const axios = require('axios')
-const cheerio = require('cheerio')
 // const { response } = require('express')
 // const { last } = require('cheerio/lib/api/traversing')
 
@@ -226,14 +226,23 @@ exports.FirstPage = (req, res) => {
 }
 
 exports.findAll = (req, res) => {
-    authenticateToken(req, res);
-    if (req.email != null) {
-    // utilizador autenticado
+  authenticateToken(req, res);
+  if (req.email != null) {
+    console.log(`FindAll - user: ${req.email.name}`);
     res.json(products)
-    }
+  }
+    // console.log("token: " + authenticateToken)
+    // if (req.email != null) {
+    // // utilizador autenticado
+    //   console.log(`FindAll - user: ${req.email.name}`);
+    // }
 }
 
 exports.findOne = async (req, res) => {
+  authenticateToken(req, res);
+  if (req.email != null) {
+    // utilizador autenticado
+    console.log(`FindAll - user: ${req.email.name}`);
     const websiteId = req.params.websiteId
     console.log("websiteId: " + websiteId)
     const websiteAdress = websites.filter(website => website.name == websiteId)[0].address
@@ -243,7 +252,7 @@ exports.findOne = async (req, res) => {
             const html = response.data
             const $ = cheerio.load(html)
             const specificproducts = []
-
+  
             if (websiteId == 'BackMarket'){
                 $('section', html).each(function () {
                     $('a[data-bmid]', html).each(function () {
@@ -297,10 +306,7 @@ exports.findOne = async (req, res) => {
                         })
                     })
                 }
-            authenticateToken(req, res);
-            if (req.email != null) {
-            // utilizador autenticado
             res.json(specificproducts)
-            }
         }).catch(err => console.log(err))
+  }
 }

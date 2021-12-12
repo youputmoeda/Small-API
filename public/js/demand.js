@@ -5,13 +5,13 @@ const modalRegistar = document.getElementById("modalRegistar");
 const bsModalRegistar = new bootstrap.Modal(
   modalRegistar,
   (backdrop = "static")
-); // Pode passar opções
-
+  ); // Pode passar opções
+  
 const btnModalLogin = document.getElementById("btnModalLogin");
 const btnModalRegistar = document.getElementById("btnModalRegistar");
 const btnLogoff = document.getElementById("btnLogoff");
 const pRegistar = document.getElementById("pRegistar");
-const listaProducts = document.getElementById("listaProducts");
+const listaProducts = document.getElementById("specificproducts");
 
 pRegistar.addEventListener("click", () => {
   bsModalLogin.hide();
@@ -113,89 +113,89 @@ function validaLogin() {
 
 
 async function getProducts(websiteId, websiteSource, websiteUrl, websiteWarra, websitePrice, websiteSpec) {
-    const listaProducts = document.getElementById("specificproducts");
-    const criteria = document.getElementById("searchkey").value;
-    console.log("Critério: " + criteria);
-    let texto = "";
-    let url = urlBase + "/products";
+  const listaProducts = document.getElementById("specificproducts");
+  const criteria = document.getElementById("searchkey").value;
+  console.log("Critério: " + criteria);
+  let texto = "";
+  let url = urlBase + "/products";
 
-    const token = localStorage.token;
-    console.log(token);
+  const token = localStorage.token;
+  console.log(token);
 
-    
-    if (criteria != "") {  
-             url = url + "/" + criteria;
-           }
-
-    console.log("URL: " + url);
-    const myInit = { 
-      method: "GET", 
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const myRequest = new Request(url, myInit);
-
-    await fetch(myRequest).then(async function (response) {
-      if (!response.ok) {
-        listaProducts.innerHTML = 
-        "Não posso mostrar produtos de momento!";
-      } else {
-        // console.log("I arrive here")
-        specificproducts = await response.json();
-        console.log(specificproducts);
-          if (websiteSource) {
-            texto += ` 
-            <!--Comentário: Link para as funcionalidades CSS do Bootstrap-->
-            <link
-              href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-              rel="stylesheet"
-              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-              crossorigin="anonymous"
-            />
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
-            <!-- Bootstrap CSS -->
-            <link
-              rel="stylesheet"
-              href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"
-            />
-                <div>
-                  <h4><a href="${websiteUrl}" target="_blank">${websiteId}</a></h4>
-                  &nbsp;&nbsp;&nbsp;Specifications: <a>${websiteSpec}</a>
-                  <br>&nbsp;&nbsp;&nbsp;Price: <a>${websitePrice}</a>
-                  <br>&nbsp;&nbsp;&nbsp;<a>${websiteWarra}</a>
-                  <br>&nbsp;&nbsp;&nbsp;Website: <a>${websiteSource}</a>
-                  </div>`;
-              console.log("arroz")
-              //<br>&nbsp;&nbsp;&nbsp;Img: <a>${websiteImg}</a>
+  
+  if (criteria != "") {  
+            url = url + "/" + criteria;
           }
-          // Retornou mais de um produto
-          for (const specificproduct of specificproducts) {
-            texto += ` 
-            <!--Comentário: Link para as funcionalidades CSS do Bootstrap-->
-            <link
-              href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-              rel="stylesheet"
-              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-              crossorigin="anonymous"
-            />
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
-            <!-- Bootstrap CSS -->
-            <link
-              rel="stylesheet"
-              href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"
-            />
-            <div>
-            <h4><em>${specificproduct.title}</em>
-            <button type = "button" class="btn btn-dark btn-sm" onclick="getProducts('${specificproduct.title}', '${specificproduct.source}', '${specificproduct.url}', '${specificproduct.Warranty}', '${specificproduct.price}', '${specificproduct.specifications}', '${specificproduct.image}')">
-              Clique aqui para detalhar este produto
-            </button></h4>
-            </div>`;
-          }
+
+  console.log("URL: " + url);
+  const myInit = { 
+    method: "GET", 
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const myRequest = new Request(url, myInit);
+
+  await fetch(myRequest).then(async function (response) {
+    if (!response.ok) {
+      listaProducts.innerHTML = 
+      "Não posso mostrar produtos de momento!";
+    } else {
+      // console.log("I arrive here")
+      specificproducts = await response.json();
+      console.log(specificproducts);
+      console.log("websiteTitle: " + websiteId)
+        if (websiteSource) {
+          texto += ` 
+          <!--Comentário: Link para as funcionalidades CSS do Bootstrap-->
+          <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+          />
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      
+          <!-- Bootstrap CSS -->
+          <link
+            rel="stylesheet"
+            href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"
+          />
+              <div>
+                <h4><a href="${websiteUrl}" target="_blank">${websiteId}</a></h4>
+                &nbsp;&nbsp;&nbsp;Specifications: <a>${websiteSpec}</a>
+                <br>&nbsp;&nbsp;&nbsp;Price: <a>${websitePrice}</a>
+                <br>&nbsp;&nbsp;&nbsp;<a>${websiteWarra}</a>
+                <br>&nbsp;&nbsp;&nbsp;Website: <a>${websiteSource}</a>
+                </div>`;
+            //<br>&nbsp;&nbsp;&nbsp;Img: <a>${websiteImg}</a>
         }
-        listaProducts.innerHTML = texto;
-    });
-  }
+        // Retornou mais de um produto
+        for (const specificproduct of specificproducts) {
+          texto += ` 
+          <!--Comentário: Link para as funcionalidades CSS do Bootstrap-->
+          <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+          />
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      
+          <!-- Bootstrap CSS -->
+          <link
+            rel="stylesheet"
+            href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"
+          />
+          <div>
+          <h4><em>${specificproduct.title}</em>
+          <button type = "button" class="btn btn-dark btn-sm" onclick="getProducts('${specificproduct.title}', '${specificproduct.source}', '${specificproduct.url}', '${specificproduct.Warranty}', '${specificproduct.price}', '${specificproduct.specifications}', '${specificproduct.image}')">
+            Clique aqui para detalhar este produto
+          </button></h4>
+          </div>`;
+        }
+      }
+      listaProducts.innerHTML = texto;
+  });
+}

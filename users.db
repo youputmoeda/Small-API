@@ -1,2 +1,5 @@
 {"_id":"teste@teste.com","confirm":1,"password":"$2b$10$jW9qLDEceEXCYJ2pICWxQ.IHRqKSkz61Qc.mnqw8.ELZUb3LIT.9u","confirmationToken":"eyJhbGciOiJIUzI1NiJ9.dGVzdGVAdGVzdGUuY29t.RJYwWZvqt2GG7_68kTMG-UtXG3NNQCWkYNFLJV2eO2M"}
 {"_id":"teste@teste1.com","confirm":1,"password":"$2b$10$hJiXmjksrZsKXBp7YOTkd.t/TI5hWMpbOUrLomIyv7DeL5YyOqnDG","confirmationToken":"eyJhbGciOiJIUzI1NiJ9.dGVzdGVAdGVzdGUxLmNvbQ.PTjXuWJsn1sQpq_dgm46qWDvz2JM1t79gCHBrPuQluA"}
+{"_id":"teste@teste2.com","confirm":1,"password":"$2b$10$PCRwwdBqmqNDnWf36egmnOBqe7Lik6AzBMgNg0f/7mYRX3rqlE0zG","confirmationToken":"eyJhbGciOiJIUzI1NiJ9.dGVzdGVAdGVzdGUyLmNvbQ.wwotomRZ54MrU20VF82_jZY_BvF2DLnpOY_bR7FkXdA"}
+{"_id":"arroz@teste.com","confirm":0,"password":"$2b$10$YFKdyzEFlSGIWCxUg39Rv.Ngauj3AciU0tomxmezEJZ9rveAMCkyi","confirmationToken":"eyJhbGciOiJIUzI1NiJ9.YXJyb3pAdGVzdGUuY29t.K1RlDGzNtKJg5cbWiETheNAaJdKWi39kCX61fteIdDM"}
+{"_id":"arroz@teste.com","confirm":1,"password":"$2b$10$YFKdyzEFlSGIWCxUg39Rv.Ngauj3AciU0tomxmezEJZ9rveAMCkyi","confirmationToken":"eyJhbGciOiJIUzI1NiJ9.YXJyb3pAdGVzdGUuY29t.K1RlDGzNtKJg5cbWiETheNAaJdKWi39kCX61fteIdDM"}
