@@ -140,7 +140,7 @@ const cheerio = require('cheerio')
 
 const websites = [
     {
-        name: 'BlackMarket',
+        name: 'BackMarket',
         address: 'https://www.backmarket.pt/apple-recondicionados.html',
         base: 'https://www.backmarket.pt'
     },
@@ -164,7 +164,7 @@ websites.forEach(website => {
             const html = response.data
             const $ = cheerio.load(html)
 
-            if (website.name == 'BlackMarket'){
+            if (website.name == 'BackMarket'){
                 $('section', html).each(function () {
                     $('a[data-bmid]', html).each(function () {
                         const title = $('h2', this).text().trim()
@@ -221,7 +221,7 @@ exports.FirstPage = (req, res) => {
         The paths that are possible are:\
         /products\
         /products/:websiteId\
-        The websites that are used are: BlackMarket, iOutlet and Swappie')
+        The websites that are used are: BackMarket, iOutlet and Swappie')
     res.json(message)
 }
 
@@ -244,7 +244,7 @@ exports.findOne = async (req, res) => {
             const $ = cheerio.load(html)
             const specificproducts = []
 
-            if (websiteId == 'BlackMarket'){
+            if (websiteId == 'BackMarket'){
                 $('section', html).each(function () {
                     $('a[data-bmid]', html).each(function () {
                         const title = $('h2', this).text().trim()

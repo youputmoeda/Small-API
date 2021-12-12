@@ -67,7 +67,7 @@ function validaRegisto() {
       statReg.innerHTML = result.message;
       document.getElementById("btnSubmitRegistar").style.display = "none";
       document.getElementById("btnCancelaRegistar").innerHTML =
-        "Fechar este diálogo aaaa";
+        "Fechar este diálogo";
     })
     .catch((error) => {
       document.getElementById(

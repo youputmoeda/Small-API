@@ -1,2 +1,2 @@
-{"_id":"teste@teste.com","confirm":0,"password":"$2b$10$jW9qLDEceEXCYJ2pICWxQ.IHRqKSkz61Qc.mnqw8.ELZUb3LIT.9u","confirmationToken":"eyJhbGciOiJIUzI1NiJ9.dGVzdGVAdGVzdGUuY29t.RJYwWZvqt2GG7_68kTMG-UtXG3NNQCWkYNFLJV2eO2M"}
 {"_id":"teste@teste.com","confirm":1,"password":"$2b$10$jW9qLDEceEXCYJ2pICWxQ.IHRqKSkz61Qc.mnqw8.ELZUb3LIT.9u","confirmationToken":"eyJhbGciOiJIUzI1NiJ9.dGVzdGVAdGVzdGUuY29t.RJYwWZvqt2GG7_68kTMG-UtXG3NNQCWkYNFLJV2eO2M"}
+{"_id":"teste@teste1.com","confirm":1,"password":"$2b$10$hJiXmjksrZsKXBp7YOTkd.t/TI5hWMpbOUrLomIyv7DeL5YyOqnDG","confirmationToken":"eyJhbGciOiJIUzI1NiJ9.dGVzdGVAdGVzdGUxLmNvbQ.PTjXuWJsn1sQpq_dgm46qWDvz2JM1t79gCHBrPuQluA"}
