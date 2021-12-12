@@ -55,58 +55,71 @@
           <div class="container">
             <div class="jumbotron">
               <h1 class="display-4">Hello, User!</h1>
-              <p class="lead">This website serve to catch and show several Reconditioned Devices of APPLE.</p>
+              <p class="lead">This website serves to show several Reconditioned Devices of APPLE.</p>
               <hr class="my-4">
               <p>In this page you have two buttons:
                 <li>
-                  In the first one you get all Reconditioned Devices of several websites;
+                  In the first one you get all Reconditioned Devices of several websites and you can use without authentication;
                 </li>
                 <li>
-                  One the second button you get Reconditioned Devices of a requested Website;
+                  In the second button you get Reconditioned Devices of a requested Website and you need authentication in order to <strong>search</strong> for the website you want
+                  <br><em>if dont write nothing it will still work without authentication</em> ;
                 </li>
-                <br>Websites that the user can request are:
+                <br>Websites that the user can search are:
                 <br>Swappie, BackMarket and iOutlet
               </p>
+              <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Warning!</strong> When you login it shows an error but dont worry just close and will still work.
+              </div>
             </div>
           </div>
 
           <button type="button" class="btn btn-outline-info btn-lg">
             <a href="onload.html"
-              >Clique aqui para obter todos os produtos</a
+              >Click here to get all products</a
             >
           </button>
           <br>
           <button type="button" class="btn btn-outline-info btn-lg">
             <a href="ondemand.html"
-              >Clique aqui para obter os produtos de um website especifico</a
+              >Click here to get products from a specific website</a
             >
           </button>
           
           <!-- Click on Modal Button -->
           <!-- <button type="button" class="btn btn-primary mx-auto d-block mt-5" data-bs-toggle="modal" data-bs-target="#modalLogin"> -->
-          <button
-            type="button"
-            class="btn btn-primary mx-auto d-block mt-5"
-            id="btnModalLogin"
-          >
-            Fazer login
-          </button>
-
-          <button
-            type="button"
-            class="btn btn-primary mx-auto d-block mt-5"
-            id="btnModalRegistar"
-          >
-            Registar
-          </button>
-
-          <button
-            type="button"
-            class="btn btn-warning mx-auto d-block mt-5"
-            id="btnLogoff"
-          >
-            Fazer logoff
-          </button>
+          <table align="right">
+            <tr>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary mx-auto d-block mt-5"
+                id="btnModalLogin"
+              >
+                Login
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary mx-auto d-block mt-5"
+                id="btnModalRegistar"
+              >
+                Register
+              </button>
+            </td>  
+            <td>
+              <button
+                type="button"
+                class="btn btn-warning mx-auto d-block mt-5"
+                id="btnLogoff"
+              >
+                LogOut
+              </button>
+            </td>
+          </tr>
+          </table>
 
           <!-- Modal para registar novo utilizador -->
           <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
@@ -122,7 +135,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">
-                    Registo de novo utilizador
+                    Register of a new spectacular user
                   </h5>
                   <button
                     type="button"
@@ -144,26 +157,26 @@
                     <p id="emailErroLoginRegistar"></p>
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">Senha</label>
+                    <label class="form-label">Password</label>
                     <input
                       type="password"
                       class="form-control"
                       id="senhaRegistar"
                       name="senhaRegistar"
-                      placeholder="Senha"
+                      placeholder="Password"
                     />
                     <p id="statusRegistar"></p>
                   </div>
                   <div class="modal-footer d-block">
                     <button id="btnCancelaRegistar" class="btn btn-warning float-end" data-bs-dismiss="modal">
-                      Cancelar
+                      Cancel
                     </button>
                     <button
                       class="btn btn-success float-end"
                       id="btnSubmitRegistar"
                       onclick="validaRegisto()"
                     >
-                      Submeter
+                      Submit
                     </button>
                   </div>
                 </div>
@@ -185,7 +198,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">
-                    Insira suas credenciais
+                    Insert your account
                   </h5>
                   <button
                     type="button"
@@ -208,13 +221,13 @@
                     <p id="emailErroLogin"></p>
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">Senha</label>
+                    <label class="form-label">Password</label>
                     <input
                       type="password"
                       class="form-control"
                       id="senhaLogin"
                       name="senhaLogin"
-                      placeholder="Senha"
+                      placeholder="Password"
                     />
                     <p id="passErroLogin"></p>
                     <p id="statusLogin"></p>
@@ -222,22 +235,22 @@
                   <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="rememberMe" />
                     <label class="form-check-label" for="rememberMe"
-                      >Lembrar-me</label
+                      >Remind</label
                     >
                   </div>
                   <div class="modal-footer d-block">
                     <p id='pRegistar' class="float-start">
-                      Sem conta ainda? <a href="#">Registe-se</a>
+                      No Account? <a href="#">Register here</a>
                     </p>
                     <button class="btn btn-warning float-end" data-bs-dismiss="modal">
-                      Cancelar
+                      Cancel
                     </button>
                     <button
                       class="btn btn-success float-end"
                       id="btnSubmitLogin"
                       onclick="validaLogin()"
                     >
-                      Submeter
+                      Submit
                     </button>
                   </div>
                 </div>
