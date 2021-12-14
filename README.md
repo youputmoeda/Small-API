@@ -19,4 +19,4 @@ Done!
 You need to do login in order to be able to search for website;
 
 The websites names are:
-Swappie, BlackMarket and iOutlet
+Swappie, BackMarket and iOutlet
